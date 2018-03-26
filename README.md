@@ -10,10 +10,12 @@ This project helps to quickly index JSON Documents and search for them.
 
 ## Usage
 
+### Load Dcouments
 ```
 $ curl -XPOST http://localhost:8080/load -F "file=@src/main/resources/sample.json"
 ```
 
+### Search for Documents
 ```
 $ curl http://localhost:8080/search\?search=orgName:Freedom
 ```
