@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lucene Demo</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<h1>Lucene Demo</h1>
+<div>
+    <input id="search" size="100" style="font-size:20px" /><button style="font-size:20px" id="searchButton">Search</button>
+    <br/>
+    <h3>Search Results</h3>
+    <textarea style="font-size:18px" disabled id="results" rows="25" cols="100">
+    </textarea>
+</div>
+<br/>
+<div style="border:1px solid; width:500px;">
+    <form action="/load" method="post" enctype="multipart/form-data">
+        <p>Select file to load: <input type="file" name="file" />
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+</div>
+</body>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $("#searchButton").click(function() {
+        var searchText = $("#search").val();
+        $.get("/search?search="+searchText, function(data) {
+            $("#results").text(JSON.stringify(data, null, "\t"));
+        });
+    });
+</script>
+</html>

@@ -30,14 +30,15 @@ public class LuceneWriter {
         this.indexState = indexState;
     }
 
-    private void indexContents(InputStream inputStream) throws FileNotFoundException {
+    private long indexContents(InputStream inputStream) throws FileNotFoundException {
         JSONArray jsonObjects = parseJSONFromStream(inputStream);
         openIndex();
-        addDocuments(jsonObjects);
+        long count = addDocuments(jsonObjects);
         finish();
+        return count;
     }
 
-    private void addDocuments(JSONArray jsonObjects) {
+    private long addDocuments(JSONArray jsonObjects) {
         for (Object o : jsonObjects) {
             org.json.JSONObject object = (org.json.JSONObject)o;
             Document doc = new Document();
@@ -63,6 +64,7 @@ public class LuceneWriter {
                 System.err.println("Error adding documents to the index. " + ex.getMessage());
             }
         }
+        return jsonObjects.length();
     }
 
     private void finish() {
@@ -94,7 +96,7 @@ public class LuceneWriter {
         return false;
     }
 
-    public void store(InputStream inputStream) throws FileNotFoundException {
-        indexContents(inputStream);
+    public long store(InputStream inputStream) throws FileNotFoundException {
+        return indexContents(inputStream);
     }
 }
