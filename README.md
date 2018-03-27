@@ -10,7 +10,7 @@ This project helps to quickly index JSON Documents and search for them.
 
 ## Usage
 
-### Load Dcouments
+### Load Documents
 ```
 $ curl -XPOST http://localhost:8080/load -F "file=@src/main/resources/sample.json"
 ```
